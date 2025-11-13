@@ -1,7 +1,7 @@
 ﻿
 namespace _02_CacaAoBugMVC.Model
 {
-    class Aluno
+    public class Aluno
     {
         /*private string nome = string.Empty;
         //Métodos acessadores
@@ -18,6 +18,7 @@ namespace _02_CacaAoBugMVC.Model
         public double Nota1 { get; set; }
         public double Nota2 { get; set; }
         public double Nota3 { get; set; }
+        public double Media { get; set; }
         public string Situacao { get; set; } = string.Empty;
     }
 }

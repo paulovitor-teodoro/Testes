@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _02_CacaAoBugMVC.Model
 {
-    class ValidaService
+    public class ValidaService
     {
         // Padrões de validação
         // - Não ter 3 letras repetidas 
