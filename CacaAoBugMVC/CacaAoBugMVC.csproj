@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D5EF049D-BACA-473E-958F-284090FDB71C}</ProjectGuid>
+    <ProjectGuid>{1DC472E8-0745-47B8-ADC6-B71C77304AB5}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>_02_CacaAoBugMVC</RootNamespace>
-    <AssemblyName>02_CacaAoBugMVC</AssemblyName>
+    <RootNamespace>CacaAoBugMVC</RootNamespace>
+    <AssemblyName>CacaAoBugMVC</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,10 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\AlunoController.cs" />
-    <Compile Include="Model\Aluno.cs" />
-    <Compile Include="Model\AlunoService.cs" />
-    <Compile Include="Model\ValidaService.cs" />
+    <Compile Include="Controllers\AlunoController.cs" />
+    <Compile Include="Models\Aluno.cs" />
+    <Compile Include="Models\AlunoService.cs" />
+    <Compile Include="Models\ValidaService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
