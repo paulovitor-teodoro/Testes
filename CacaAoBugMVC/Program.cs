@@ -10,90 +10,75 @@ namespace CacaAoBugMVC
 {
     internal class Program
     {
-        static void Main(string[] args)
+        
+        static void Main()
         {
-            var controller = new AlunoController();
-            var val = controller.GetValidacaoService();
+            AlunoController controller = new AlunoController();
+            var validacao = controller.GetValidacaoService();
 
-            Console.WriteLine("=== CaçaAoBug – Sistema de Notas (MVC Console) ===");
-
-            bool continuarSistema = true;
-            while (continuarSistema)
+            while (true)
             {
-
-                bool continuarCadastro = true;
-                while (continuarCadastro)
+                Console.Clear();
+                Console.WriteLine("=== Sistema de Notas - Caça ao Bug MVC ===");
+                string nome;
+                while (true)
                 {
-                    // Nome
-                    string nome;
-                    do
+                    while (true)
                     {
-                        Console.Write("Informe o nome do aluno: ");
-                        nome = Console.ReadLine() ?? string.Empty;
-                        if (!val.ValidaNome(nome, out string erroNome))
-                        {
-                            Console.WriteLine($"Nome inválido: {erroNome}");
-                        }
-                        else break;
-                    } while (true);
+                        Console.WriteLine("Informe o nome do Aluno: ");
+                        nome = Console.ReadLine();
+                        if (validacao.ValidaNome(nome, out string msgErro)) break;
 
-                    // Nota1
-                    double nota1 = LerNotaConsole(val, "Digite a primeira nota: ");
+                        Console.WriteLine($"Erro:\n{msgErro}\n");
+                    }
 
-                    // Nota2
-                    double nota2 = LerNotaConsole(val, "Digite a segunda nota: ");
+                    double nota1 = Program.LerNota("1", validacao);
+                    double nota2 = Program.LerNota("2", validacao);
+                    double nota3 = Program.LerNota("3", validacao);
 
-                    // Nota3
-                    double nota3 = LerNotaConsole(val, "Digite a terceira nota: ");
-
+                    //---------Criar o objeto Aluno---------//
                     var aluno = new Aluno
                     {
-                        Nome = nome.Trim(),
+                        Nome = nome,
                         Nota1 = nota1,
                         Nota2 = nota2,
                         Nota3 = nota3
                     };
 
-                    if (!controller.AdicionarAluno(aluno, out string mensagemErro))
+                    if(controller.AdicionarAluno(aluno, out string msgErroAdd))
                     {
-                        Console.WriteLine($"Não foi possível adicionar o aluno: {mensagemErro}");
+                        Console.WriteLine($"\nMédia: {aluno.Media}");
+                        Console.WriteLine($"Situação: {aluno.Situacao}");
                     }
                     else
                     {
-                        Console.WriteLine($"\nAluno cadastrado: {aluno.Nome} | Média: {aluno.Media:F2} | Situação: {aluno.Situacao}");
+                        Console.WriteLine($"Erro: {msgErroAdd}");
                     }
 
-                    Console.Write("\nDeseja cadastrar outro aluno neste ciclo? (S/N): ");
-                    string resp = (Console.ReadLine() ?? "").Trim().ToUpper();
-                    if (resp != "S") continuarCadastro = false;
+                    Console.WriteLine("Deseja Cadastrar outro Aluno? (S/N)");
+                    if (Console.ReadLine().ToUpper() != "S") break;
                 }
 
-                // Estatísticas do ciclo
-                Console.WriteLine("\n=== Estatísticas da Turma (até agora) ===");
-                var alunos = controller.ObterAlunos();
-                Console.WriteLine($"Total de alunos cadastrados: {alunos.Count}");
-                Console.WriteLine($"Taxa de aprovação: {controller.ObterTaxaAprovacao():F1}%");
+                //----Estatísticas de Aprovação----//
+                Console.WriteLine($"Taxa de Aprovação: {controller.ObterTaxaAprovacao():f2}%");
 
-                Console.Write("\nDeseja iniciar outro ciclo (limpar e continuar)? (S/N): ");
-                string r = (Console.ReadLine() ?? "").Trim().ToUpper();
-                if (r != "S") continuarSistema = false;
+                Console.WriteLine("Deseja reiniciar o sistema? (S/N)");
+                if (Console.ReadLine().ToUpper() != "S") break;
             }
-
-            Console.WriteLine("\nEncerrando o sistema. Obrigado!");
         }
 
-        private static double LerNotaConsole(Models.ValidacaoService val, string prompt)
+        public static double LerNota(string nota, ValidacaoService validacao)
         {
             while (true)
             {
-                Console.Write(prompt);
-                string entrada = Console.ReadLine() ?? string.Empty;
-                if (val.TentarConverterNota(entrada, out double nota))
-                {
-                    return nota;
-                }
-                Console.WriteLine("Valor inválido. Informe um número entre 0 e 10 (ex: 7.5).");
+                Console.WriteLine($"Informe a {nota} Nota: ");
+                string entrada = Console.ReadLine();
+                //return double.Parse(entrada);
+                if(validacao.ConverteNota(entrada, out double valorNota)) return valorNota;
+
+                Console.WriteLine("Nota inválida! Digite um valor entre 0 e 10");
             }
         }
+
     }
-}
+}      

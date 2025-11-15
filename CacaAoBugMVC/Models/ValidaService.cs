@@ -34,7 +34,7 @@ namespace CacaAoBugMVC.Models
         }
 
         // tenta converter a entrada textual em double (aceita vírgula ou ponto)
-        public bool TentarConverterNota(string entrada, out double nota)
+        public bool ConverteNota(string entrada, out double nota)
         {
             nota = -1;
             if (string.IsNullOrWhiteSpace(entrada)) return false;
