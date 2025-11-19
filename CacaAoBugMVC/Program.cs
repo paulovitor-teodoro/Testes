@@ -13,6 +13,8 @@ namespace CacaAoBugMVC
         
         static void Main()
         {
+
+
             AlunoController controller = new AlunoController();
             var validacao = controller.GetValidacaoService();
 

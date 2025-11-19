@@ -10,7 +10,8 @@ namespace CacaAoBugMVC.Models
     public class ValidacaoService
     {
         // valida nome: mínimo 3 caracteres, não ter 3 letras iguais seguidas, não ter duplo espaço
-        private readonly string padraoNome = @"^(?!.*([A-Za-zÀ-ÖØ-öø-ÿ])\1\1)(?!.* {2,})(?=.{3,}).+$";
+        private readonly string padraoNome = @"^(?!.*([A-Za-zÀ-ÖØ-öø-ÿ])\1\1)(?!.* {2,})(?=.{3,})[A-Za-zÀ-ÖØ-öø-ÿ ]+$";
+
 
         // valida nota: 0..10, aceita decimais (ex: 7,5 or 7.5)
         private readonly string padraoNota = @"^(?:10(?:[.,]0+)?|[0-9](?:[.,][0-9]+)?)$";
